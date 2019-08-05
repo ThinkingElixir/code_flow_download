@@ -34,14 +34,13 @@ defmodule CodeFlow.Railway do
 
   def validate_at_least_age(error, _cuttoff_age), do: error
 
-  def check_name_blacklist({:ok, %User{name: name} = user}) do
-    blacklist = ["Tom", "Tim", "Tammy"]
+  def check_name_blacklist({:ok, %User{name: name} = _user})
+      when name in ["Tom", "Tim", "Tammy"] do
+    {:error, "User #{inspect(name)} is blacklisted"}
+  end
 
-    if Enum.member?(blacklist, name) do
-      {:error, "User #{inspect(name)} is blacklisted"}
-    else
-      {:ok, user}
-    end
+  def check_name_blacklist({:ok, %User{} = user}) do
+    {:ok, user}
   end
 
   def check_name_blacklist({:error, _reason} = error), do: error
