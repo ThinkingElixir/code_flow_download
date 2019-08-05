@@ -11,7 +11,7 @@ defmodule CodeFlow.RailwayTest do
   # =============
   # - Reject User's who are not active.
   # - Reject User's who's age is < 16.
-  # - Reject User's who's name is in the blacklist ["Tom", "Tim", "Tammy"].
+  # - Reject User's who's name is in the hardcoded blacklist ["Tom", "Tim", "Tammy"].
   # - Increment the all other user's points by 100
 
   describe "award_points/2" do
