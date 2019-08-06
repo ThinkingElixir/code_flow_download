@@ -1,12 +1,12 @@
 defmodule CodeFlow.Railway do
   @moduledoc """
-  Defining a workflow or "code flow" using the Railway pattern.
+  Defining a workflow or "Code Flow" using the Railway Pattern.
   """
   alias CodeFlow.User
 
   @doc """
   Works well when the functions are designed to pass the output of one
-  level as the input of the next function.
+  step as the input of the next function.
   """
   def award_points(%User{} = user, inc_point_value) do
     user
