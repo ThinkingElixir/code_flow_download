@@ -11,6 +11,7 @@ defmodule CodeFlow.Railway.AwardPointsTest do
   # TODO: could have another step lookup a mapping from another file. The mapping can return a "not found" error.
 
 # convert string to number, increment number, divide in a way to create a repeating float, round to a precision, convert back to a string with a "$".
+# could be a submission of answers. Could be a "grading" function. Turns answers into a grade? Performs fake lookup to return a % grade?
 # Convert a floating point value into a grade? If negative or > 100 is an error?
 
   # INSTRUCTIONS:
