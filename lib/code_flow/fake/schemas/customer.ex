@@ -1,11 +1,11 @@
 defmodule CodeFlow.Fake.Schemas.Customer do
   @moduledoc """
-  Fake Customer struct used for Code Flow examples.
+  Simplified non-database struct that represents a Customer. Used for examples.
   """
   alias __MODULE__
 
-  @enforce_keys [:name]
   defstruct [
+    :id,
     :name,
     :location,
     :contact_name,
@@ -15,7 +15,8 @@ defmodule CodeFlow.Fake.Schemas.Customer do
   ]
 
   @type t :: %Customer{
-          name: String.t(),
+          id: nil | integer(),
+          name: nil | String.t(),
           location: nil | String.t(),
           contact_name: nil | String.t(),
           contact_number: nil | String.t(),

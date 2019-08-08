@@ -4,20 +4,17 @@ defmodule CodeFlow.Fake.Schemas.Item do
   """
   alias __MODULE__
 
-  @enforce_keys [:id, :name]
   defstruct [
     :id,
     :name,
     {:weight, 0.0},
-    {:quantity, 0},
     {:active, true}
   ]
 
   @type t :: %Item{
-          id: integer(),
-          name: String.t(),
+          id: nil | integer(),
+          name: nil | String.t(),
           weight: float(),
-          quantity: integer(),
           active: boolean()
         }
 end
