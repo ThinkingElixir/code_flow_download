@@ -1,9 +1,9 @@
-defmodule CodeFlow.Fake.Schemas.OrderItem do
+defmodule CodeFlow.Schemas.OrderItem do
   @moduledoc """
   Simplified non-database struct that represents an OrderItem. Used for examples.
   """
   alias __MODULE__
-  alias CodeFlow.Fake.Schemas.Item
+  alias CodeFlow.Schemas.Item
 
   defstruct [
     :id,

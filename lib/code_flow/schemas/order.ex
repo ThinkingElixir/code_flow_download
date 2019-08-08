@@ -1,4 +1,4 @@
-defmodule CodeFlow.Fake.Schemas.Order do
+defmodule CodeFlow.Schemas.Order do
   @moduledoc """
   Simplified non-database struct that represents an Order. Used for examples.
   """

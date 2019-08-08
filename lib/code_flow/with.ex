@@ -2,7 +2,7 @@ defmodule CodeFlow.With.AwardPoints do
   @moduledoc """
   Defining a workflow or "Code Flow" using the Railway Pattern.
   """
-  alias CodeFlow.Fake.Schemas.User
+  alias CodeFlow.Schemas.User
 
   @doc """
   Works well when the functions are designed to pass the output of one
