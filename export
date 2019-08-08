@@ -1,0 +1,52 @@
+#!/bin/bash
+
+EXPORT_DIR="_export/code_flow"
+
+# initial state cleanup
+rm -rf _export/
+rm code_flow.zip
+
+# create the export area with initial code
+mkdir -p ${EXPORT_DIR}
+git checkout master
+cp -r config/ ${EXPORT_DIR}/config/
+cp -r lib/ ${EXPORT_DIR}/lib/
+cp -r test/ ${EXPORT_DIR}/test/
+cp .gitignore ${EXPORT_DIR}/
+cp mix.exs ${EXPORT_DIR}/
+cp *.md ${EXPORT_DIR}/
+
+# make _export a git folder
+cd ${EXPORT_DIR}/
+git init
+
+# add the files to the repo and make the initial commit
+git add .
+GIT_COMMITTER_NAME="Mark Ericksen" GIT_COMMITTER_EMAIL="noreply@example.com" git commit --author="Mark Ericksen <>" -m "initial commit, tests with no solutions"
+
+# Change to the solutions branch
+cd ../../
+git checkout solutions
+
+# Copy the solutions
+cp -r lib/ ${EXPORT_DIR}/
+
+# Commit the solutions
+cd ${EXPORT_DIR}
+git checkout -b solutions
+git add .
+GIT_COMMITTER_NAME="Mark Ericksen" GIT_COMMITTER_EMAIL="noreply@example.com" git commit --author="Mark Ericksen <>" -m "solutions"
+
+# Checkout the master branch and zip up the directory (contains the `.` dotfiles).
+# Extracts cleaner this way too.
+git checkout master
+cd ..
+zip -r code_flow.zip code_flow
+
+# Move the resulting zip file up a folder
+mv code_flow.zip ..
+
+# restore the state. End up back on master. Remove the _export/ folder
+cd ../
+git checkout master
+rm -rf _export/
