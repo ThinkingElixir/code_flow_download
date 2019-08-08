@@ -1,4 +1,4 @@
-defmodule CodeFlow.Fake.Schemas.Item do
+defmodule CodeFlow.Schemas.Item do
   @moduledoc """
   Simplified non-database struct that represents an Item. Used for examples.
   """

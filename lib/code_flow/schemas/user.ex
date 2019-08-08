@@ -1,4 +1,4 @@
-defmodule CodeFlow.Fake.Schemas.User do
+defmodule CodeFlow.Schemas.User do
   @moduledoc """
   Simplified non-database struct that represents a User. Used for examples.
   """
