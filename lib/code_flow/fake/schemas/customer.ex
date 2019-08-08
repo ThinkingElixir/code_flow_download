@@ -1,11 +1,18 @@
-defmodule CodeFlow.Customer do
+defmodule CodeFlow.Fake.Schemas.Customer do
   @moduledoc """
-  Customer struct used in Code Flow examples.
+  Fake Customer struct used for Code Flow examples.
   """
   alias __MODULE__
 
   @enforce_keys [:name]
-  defstruct [:name, :location, :contact_name, :contact_number, {:orders, []}, {:active, true}]
+  defstruct [
+    :name,
+    :location,
+    :contact_name,
+    :contact_number,
+    {:orders, []},
+    {:active, true}
+  ]
 
   @type t :: %Customer{
           name: String.t(),
