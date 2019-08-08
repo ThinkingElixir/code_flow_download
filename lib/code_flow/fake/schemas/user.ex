@@ -1,4 +1,4 @@
-defmodule CodeFlow.User do
+defmodule CodeFlow.Fake.Schemas.User do
   @moduledoc """
   User struct used in practice solutions.
   """
