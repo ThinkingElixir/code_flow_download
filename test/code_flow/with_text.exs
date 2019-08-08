@@ -4,7 +4,7 @@ defmodule CodeFlow.With.AwardPointsTest do
   the workflow.
   """
   use ExUnit.Case
-  alias CodeFlow.User
+  alias CodeFlow.Fake.Schemas.User
   alias CodeFlow.With.AwardPoints
 
   # INSTRUCTIONS:

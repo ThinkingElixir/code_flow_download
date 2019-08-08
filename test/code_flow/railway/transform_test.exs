@@ -1,10 +1,10 @@
-defmodule CodeFlow.Railway.AwardPointsTest do
+defmodule CodeFlow.Railway.TransformTest do
   @moduledoc """
   Complete the code to make the tests pass. Use the Railway Pattern to create
   steps in the workflow.
   """
   use ExUnit.Case
-  alias CodeFlow.User
+  alias CodeFlow.Fake.Schemas.User
   alias CodeFlow.Railway.Transform
 
 

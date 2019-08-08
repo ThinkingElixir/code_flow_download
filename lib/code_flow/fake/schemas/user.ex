@@ -1,6 +1,6 @@
-defmodule CodeFlow.User do
+defmodule CodeFlow.Fake.Schemas.User do
   @moduledoc """
-  User struct used in practice solutions.
+  Simplified non-database struct that represents a User. Used for examples.
   """
   alias __MODULE__
 
