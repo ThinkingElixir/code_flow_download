@@ -25,3 +25,6 @@ code_flow-*.tar
 
 # Exclude folder for exporting the project
 /_export/
+
+# ignore asdf and other config file for managing Elixir version
+.tool-versions
