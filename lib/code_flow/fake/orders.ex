@@ -14,7 +14,8 @@ defmodule CodeFlow.Fake.Orders do
   """
   @spec new(Customer.t()) :: {:ok, Order.t()} | {:error, String.t()}
   def new(%Customer{active: true} = customer) do
-    {:ok, %Order{id: 99, customer: customer}}
+    new_id = :erlang.unique_integer([:positive, :monotonic])
+    {:ok, %Order{id: new_id, customer: customer}}
   end
 
   def new(%Customer{} = _customer) do
