@@ -22,9 +22,19 @@ defmodule CodeFlow.Fake.Orders do
     {:error, "Cannot create order for inactive customer"}
   end
 
-  def add_item(%Order{} = order, %Item{} = item, quantity) do
+  @doc """
+  Add an item to an order. Includes the provided quantity. Does not allow order
+  an inactive item. Returns an updated Order with the item added to the
+  "order_items" list.
+  """
+  @spec add_item(Order.t(), Item.t(), quantity :: integer()) :: {:ok, Order.t()} | {:error, String.t()}
+  def add_item(%Order{} = order, %Item{active: true} = item, quantity) do
     new_order_item = %OrderItem{item: item, quantity: quantity}
-    updated_order = %Order{order | order_items: [ new_order_item | order.order_items]}
+    updated_order = %Order{order | order_items: [new_order_item | order.order_items]}
     {:ok, updated_order}
+  end
+
+  def add_item(%Order{} = _order, %Item{active: false} = _item, _quantity) do
+    {:error, "Cannot order an inactive item"}
   end
 end
