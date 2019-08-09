@@ -5,7 +5,9 @@ defmodule CodeFlow.Fake.Orders do
   are working on.
   """
   alias CodeFlow.Schemas.Order
+  alias CodeFlow.Schemas.OrderItem
   alias CodeFlow.Schemas.Customer
+  alias CodeFlow.Schemas.Item
 
   @doc """
   Start a new Order for a customer. Does not allow ordering for an inactive customer.
@@ -15,7 +17,13 @@ defmodule CodeFlow.Fake.Orders do
     {:ok, %Order{id: 99, customer: customer}}
   end
 
-  def new(_customer) do
+  def new(%Customer{} = _customer) do
     {:error, "Cannot create order for inactive customer"}
+  end
+
+  def add_item(%Order{} = order, %Item{} = item, quantity) do
+    new_order_item = %OrderItem{item: item, quantity: quantity}
+    updated_order = %Order{order | order_items: [ new_order_item | order.order_items]}
+    {:ok, updated_order}
   end
 end

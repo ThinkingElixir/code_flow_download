@@ -5,6 +5,7 @@ defmodule CodeFlow.Fake.Customers do
   are working on.
   """
   alias CodeFlow.Schemas.Customer
+  alias CodeFlow.Schemas.Order
 
   @doc """
   Find a customer by it's unique ID.
@@ -25,6 +26,22 @@ defmodule CodeFlow.Fake.Customers do
       nil -> {:error, "Customer not found"}
       %Customer{} = customer -> {:ok, customer}
     end
+  end
+
+  @doc """
+  Notify a customer that an event occurred. The event is a tuple of the event
+  name/type and any related data.
+
+  NOTE: This only provides a mock interface for the practice examples. This
+  sends a message to the process running the code, in the case of tests, it will
+  be the test runner process. The test uses this message passing to observe that
+  a created side-effect was triggered correctly. In a "real" system, you might
+  instead observe the side-effects of a created email, SMS, etc.
+  """
+  def notify(customer, event)
+  def notify(%Customer{} = _customer, {:order_placed, %Order{} = _order} = event) do
+    send(self(), {:notify, event})
+    :ok
   end
 
 end
