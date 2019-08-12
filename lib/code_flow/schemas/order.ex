@@ -6,7 +6,6 @@ defmodule CodeFlow.Schemas.Order do
 
   defstruct [
     :id,
-    :name,
     :customer,
     {:order_items, []},
     {:active, true}
@@ -14,7 +13,6 @@ defmodule CodeFlow.Schemas.Order do
 
   @type t :: %Order{
           id: nil | integer(),
-          name: nil | String.t(),
           customer: nil | Customer.t(),
           order_items: [OrderItem.t()],
           active: boolean()

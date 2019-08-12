@@ -6,13 +6,11 @@ defmodule CodeFlow.Schemas.OrderItem do
   alias CodeFlow.Schemas.Item
 
   defstruct [
-    :id,
     :item,
     {:quantity, 0}
   ]
 
   @type t :: %OrderItem{
-          id: nil | integer(),
           item: nil | Item.t(),
           quantity: integer()
         }

@@ -9,7 +9,7 @@ defmodule CodeFlow.Schemas.Customer do
     :name,
     :location,
     :contact_name,
-    :contact_number,
+    :contact_email,
     {:orders, []},
     {:active, true}
   ]
@@ -19,7 +19,7 @@ defmodule CodeFlow.Schemas.Customer do
           name: nil | String.t(),
           location: nil | String.t(),
           contact_name: nil | String.t(),
-          contact_number: nil | String.t(),
+          contact_email: nil | String.t(),
           orders: list(),
           active: boolean()
         }
