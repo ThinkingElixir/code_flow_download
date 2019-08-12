@@ -67,7 +67,7 @@ defmodule CodeFlow.Fake.Customers do
   a created side-effect was triggered correctly. In a "real" system, you might
   instead observe the side-effects of a created email, SMS, etc.
   """
-  @spec notify(Customer.t(), event) :: {:error, String.t() | :timeout}
+  @spec notify(Customer.t(), event) :: :ok | {:error, String.t() | :timeout}
   def notify(%Customer{contact_email: nil} = _customer, _event),
     do: {:error, "Customer contact email missing"}
 
