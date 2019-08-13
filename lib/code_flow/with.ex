@@ -3,10 +3,10 @@ defmodule CodeFlow.With do
   Defining a workflow or "Code Flow" using the Railway Pattern.
   """
   alias CodeFlow.Schemas.User
-  alias CodeFlow.Customers
-  alias CodeFlow.Customers
-  alias CodeFlow.Orders
-  alias CodeFlow.Items
+  alias CodeFlow.Schemas.Order
+  alias CodeFlow.Fake.Customers
+  alias CodeFlow.Fake.Orders
+  alias CodeFlow.Fake.Items
 
   @doc """
   Works well when the functions are designed to pass the output of one
@@ -66,7 +66,7 @@ defmodule CodeFlow.With do
   # No "else" would be required if the timeout error had been handled and instead returned a string.
 
   @spec place_new_order(customer_id :: integer, item_id :: integer, quantity :: integer) ::
-          {:ok, CodeFlow.Schemas.Order.t()} | {:error, String.t()}
+          {:ok, Order.t()} | {:error, String.t()}
   def place_new_order(customer_id, item_id, quantity) do
     with {:ok, customer} <- Customers.find(customer_id),
          {:ok, item} <- Items.find(item_id),
