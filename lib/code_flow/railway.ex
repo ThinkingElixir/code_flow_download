@@ -1,4 +1,4 @@
-defmodule CodeFlow.Railway.AwardPoints do
+defmodule CodeFlow.Railway do
   @moduledoc """
   Defining a workflow or "Code Flow" using the Railway Pattern.
   """

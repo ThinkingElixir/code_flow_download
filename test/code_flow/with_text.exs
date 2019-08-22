@@ -5,7 +5,7 @@ defmodule CodeFlow.With.AwardPointsTest do
   """
   use ExUnit.Case
   alias CodeFlow.Schemas.User
-  alias CodeFlow.With.AwardPoints
+  alias CodeFlow.With
 
   # INSTRUCTIONS:
   # =============
