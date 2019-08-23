@@ -26,8 +26,11 @@ defmodule CodeFlow.CaseTest do
       assert {:ok, :adult} == Case.classify_user(%User{name: "Lizzie", age: 18})
     end
 
+    test "nil age returns specific reason" do
+      assert {:error, "Age is required"} == Case.classify_user(%User{name: "Nilbo", age: nil})
+    end
+
     test "anything else is :invalid" do
-      assert {:error, :invalid} == Case.classify_user(%User{name: "Nilbo", age: nil})
       assert {:error, :invalid} == Case.classify_user(%User{name: "Time Travis", age: -100})
       assert {:error, :invalid} == Case.classify_user("a string")
       assert {:error, :invalid} == Case.classify_user(40)
@@ -35,14 +38,14 @@ defmodule CodeFlow.CaseTest do
   end
 
   describe "read_file/1" do
-    # TODO: create sample file for test
     test "returns file contents when file found" do
-      assert false
+      {:ok, contents} = Case.read_file("./test/support/secret_numbers.txt")
+      assert contents =~ "These are my secrets!"
     end
 
     test "returns error when file not found" do
-      # handle :enoent?
-      assert false
+      {:error, reason} = Case.read_file(".test/support/invalid_file.txt")
+      assert reason == "File not found"
     end
   end
 
