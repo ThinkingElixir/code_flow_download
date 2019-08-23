@@ -2,6 +2,7 @@ defmodule CodeFlow.With do
   @moduledoc """
   Defining a workflow or "Code Flow" using the Railway Pattern.
   """
+  alias CodeFlow.Schemas.User
   alias CodeFlow.Schemas.Order
   # alias CodeFlow.Fake.Customers
   # alias CodeFlow.Fake.Orders
