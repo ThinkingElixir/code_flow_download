@@ -9,34 +9,48 @@ defmodule CodeFlow.Fake.Users do
   @user_db %{
     1 => %User{
       id: 1,
-      name: "Squiggles and Blopps",
-      contact_name: "Sally",
-      contact_email: "sally@example.com"
+      name: "Annie",
+      age: 35,
+      hair: "blond",
+      points: 2200,
+      admin: true,
+      active: true
     },
     2 => %User{
       id: 2,
-      name: "ACME, Inc",
-      contact_name: "Gary",
-      contact_email: "gary@example.com"
+      name: "George",
+      age: 17,
+      hair: "brown",
+      points: 450,
+      admin: false,
+      active: true
     },
     3 => %User{
       id: 3,
-      name: "Clown Supply Store",
-      contact_name: "Howard",
-      contact_email: nil
+      name: "Jill",
+      age: 10,
+      hair: "dark brown",
+      points: 320,
+      admin: false,
+      active: true
     },
     4 => %User{
       id: 4,
-      name: "[INACTIVE] Lethargy Inc",
-      contact_name: "Lucy",
-      contact_email: "lucy@example.com",
-      active: false
+      name: "Tom",
+      age: 50,
+      hair: nil,
+      points: 2000,
+      admin: false,
+      active: true
     },
     5 => %User{
       id: 5,
-      name: "Always Broken, Co.",
-      contact_name: "Bruce",
-      contact_email: "bruce@example.com"
+      name: "Lizzie",
+      age: 18,
+      hair: "blond",
+      points: 1200,
+      admin: false,
+      active: true
     }
   }
 
