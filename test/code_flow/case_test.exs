@@ -7,7 +7,7 @@ defmodule CodeFlow.CaseTest do
   alias CodeFlow.Schemas.User
   alias CodeFlow.Case
 
-  describe "simple_example/?" do
+  describe "classify_user/1" do
     test "idenitifies minors" do
       assert {:ok, :minor} == Case.classify_user(%User{name: "Jill", age: 10})
       assert {:ok, :minor} == Case.classify_user(%User{name: "Bill", age: 17})
