@@ -51,11 +51,20 @@ defmodule CodeFlow.CaseTest do
 
   describe "find_user/1" do
     test "returns User struct when found" do
-      assert false
+      {:ok, %User{} = found} = Case.find_user(1)
+      assert found.id == 1
+      assert found.name == "Annie"
+
+      {:ok, %User{} = found} = Case.find_user(2)
+      assert found.id == 2
     end
 
     test "returns error tuple when with explanation when not found" do
-      assert false
+      {:error, reason} = Case.find_user(100)
+      assert reason == "User not found"
+
+      {:error, reason} = Case.find_user("abc")
+      assert reason == "User not found"
     end
   end
 end
