@@ -3,6 +3,7 @@ defmodule CodeFlow.Case do
   Fix or complete the code to make the tests pass.
   """
   alias CodeFlow.Schemas.User
+  alias CodeFlow.Fake.Users
 
   def classify_user(user) do
     case user do
@@ -30,6 +31,13 @@ defmodule CodeFlow.Case do
     end
   end
 
-  def find_user(_user_id) do
+  def find_user(user_id) do
+    case Users.one(user_id) do
+      %User{} = user ->
+        {:ok, user}
+
+      nil ->
+        {:error, "User not found"}
+    end
   end
 end
