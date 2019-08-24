@@ -3,6 +3,7 @@ defmodule CodeFlow.Case do
   Fix or complete the code to make the tests pass.
   """
   alias CodeFlow.Schemas.User
+  alias CodeFlow.Fake.Users
 
   def classify_user(_user) do
 
