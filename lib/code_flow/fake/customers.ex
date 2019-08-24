@@ -7,6 +7,49 @@ defmodule CodeFlow.Fake.Customers do
   alias CodeFlow.Schemas.Customer
   alias CodeFlow.Schemas.Order
 
+  @customer_db %{
+    1 => %Customer{
+      id: 1,
+      name: "Squiggles and Blopps",
+      contact_name: "Sally",
+      contact_email: "sally@example.com"
+    },
+    2 => %Customer{
+      id: 2,
+      name: "ACME, Inc",
+      contact_name: "Gary",
+      contact_email: "gary@example.com"
+    },
+    3 => %Customer{
+      id: 3,
+      name: "Clown Supply Store",
+      contact_name: "Howard",
+      contact_email: nil
+    },
+    4 => %Customer{
+      id: 4,
+      name: "[INACTIVE] Lethargy Inc",
+      contact_name: "Lucy",
+      contact_email: "lucy@example.com",
+      active: false
+    },
+    5 => %Customer{
+      id: 5,
+      name: "Always Broken, Co.",
+      contact_name: "Bruce",
+      contact_email: "bruce@example.com"
+    }
+  }
+
+  @doc """
+  A simplified simulation of a Repo.one/2 call. Takes an ID, looks up the
+  Customer entry. If not found, a `nil` is returned.
+  """
+  @spec one(id :: integer) :: nil | Customer.t()
+  def one(id) do
+    Map.get(@customer_db, id)
+  end
+
   @doc """
   Find a customer by it's unique ID.
 
@@ -15,41 +58,7 @@ defmodule CodeFlow.Fake.Customers do
   """
   @spec find(id :: integer()) :: {:ok, Customer.t()} | {:error, String.t()}
   def find(id) when is_integer(id) do
-    database = %{
-      1 => %Customer{
-        id: 1,
-        name: "Squiggles and Blopps",
-        contact_name: "Sally",
-        contact_email: "sally@example.com"
-      },
-      2 => %Customer{
-        id: 2,
-        name: "ACME, Inc",
-        contact_name: "Gary",
-        contact_email: "gary@example.com"
-      },
-      3 => %Customer{
-        id: 3,
-        name: "Clown Supply Store",
-        contact_name: "Howard",
-        contact_email: nil
-      },
-      4 => %Customer{
-        id: 4,
-        name: "[INACTIVE] Lethargy Inc",
-        contact_name: "Lucy",
-        contact_email: "lucy@example.com",
-        active: false
-      },
-      5 => %Customer{
-        id: 5,
-        name: "Always Broken, Co.",
-        contact_name: "Bruce",
-        contact_email: "bruce@example.com"
-      }
-    }
-
-    case Map.get(database, id) do
+    case Map.get(@customer_db, id) do
       nil -> {:error, "Customer not found"}
       %Customer{} = customer -> {:ok, customer}
     end
