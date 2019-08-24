@@ -7,13 +7,7 @@ defmodule CodeFlow.CaseTest do
   alias CodeFlow.Schemas.User
   alias CodeFlow.Case
 
-  describe "simple_example/?" do
-    # TODO: want a simpler example. Based on solution from Pattern Matching?
-    # TODO: use of case statement with guard clauses?
-    #
-    # TODO: could be same kind of example that would be otherwise done with
-    # function clauses. Show how it can be done with a case. Could express my preference?
-
+  describe "classify_user/1" do
     test "idenitifies minors" do
       assert {:ok, :minor} == Case.classify_user(%User{name: "Jill", age: 10})
       assert {:ok, :minor} == Case.classify_user(%User{name: "Bill", age: 17})
