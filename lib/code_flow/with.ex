@@ -1,6 +1,6 @@
 defmodule CodeFlow.With do
   @moduledoc """
-  Defining a workflow or "Code Flow" using the Railway Pattern.
+  Defining a workflow or "Code Flow" using a `with` statement.
   """
   alias CodeFlow.Schemas.Order
   # alias CodeFlow.Fake.Customers
@@ -9,8 +9,7 @@ defmodule CodeFlow.With do
 
   @spec place_new_order(customer_id :: integer, item_id :: integer, quantity :: integer) ::
           {:ok, Order.t()} | {:error, String.t()}
-  def place_new_order(customer_id, item_id, quantity) do
+  def place_new_order(_customer_id, _item_id, _quantity) do
 
   end
-
 end
