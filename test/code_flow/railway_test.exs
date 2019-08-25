@@ -44,9 +44,9 @@ defmodule CodeFlow.RailwayTest do
   end
 
   ###
-  ### If you want a more explicit walk-through on the suggested steps,
-  ### then use the following tests as a guide. The individual functions could
-  ### be either public or private and may or may not be tested individually.
+  ### For a more explicit walk-through on the suggested steps, use the following
+  ### tests as a guide. The individual functions could be either public or private
+  ### and may or may not be tested individually.
   ###
 
   describe "validate_is_active/1" do
