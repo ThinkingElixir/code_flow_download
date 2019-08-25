@@ -7,9 +7,6 @@ defmodule CodeFlow.With do
   alias CodeFlow.Fake.Orders
   alias CodeFlow.Fake.Items
 
-  # Benefits: pull disparate re-usable business logic functions together into an
-  # ad-hoc flow.
-  #
   # See the benefit of functions returning tuples? It is easier for pattern matching.
   # If both Customers.find/1 and Items.find/1 returned `nil` when not found, you
   # couldn't tell the difference in the `else` for "what" required thing wasn't
@@ -34,6 +31,4 @@ defmodule CodeFlow.With do
         error
     end
   end
-
-  # TODO: explain that no "else" condition results in the error being returned directly.
 end
