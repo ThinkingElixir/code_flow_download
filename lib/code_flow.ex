@@ -3,16 +3,4 @@ defmodule CodeFlow do
   Documentation for CodeFlow.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> CodeFlow.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
 end
