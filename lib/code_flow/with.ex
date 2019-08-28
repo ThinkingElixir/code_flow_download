@@ -7,13 +7,6 @@ defmodule CodeFlow.With do
   alias CodeFlow.Fake.Orders
   alias CodeFlow.Fake.Items
 
-  # See the benefit of functions returning tuples? It is easier for pattern matching.
-  # If both Customers.find/1 and Items.find/1 returned `nil` when not found, you
-  # couldn't tell the difference in the `else` for "what" required thing wasn't
-  # found.
-  #
-  # No "else" would be required if the timeout error had been handled and instead returned a string.
-
   @spec place_new_order(customer_id :: integer, item_id :: integer, quantity :: integer) ::
           {:ok, Order.t()} | {:error, String.t()}
   def place_new_order(customer_id, item_id, quantity) do
