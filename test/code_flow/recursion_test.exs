@@ -37,6 +37,20 @@ defmodule CodeFlow.RecursionTest do
     end
   end
 
+  describe "create_customers/1" do
+    test "calls Customers.create/1 correct number of times" do
+      assert false
+    end
+
+    test "returns text saying how many were created" do
+      assert "Created 0 customers!" == Recursion.create_customers(0)
+      assert "Created 1 customers!" == Recursion.create_customers(1)
+      assert "Created 5 customers!" == Recursion.create_customers(5)
+      assert "Created 10 customers!" == Recursion.create_customers(10)
+      assert "Created 100 customers!" == Recursion.create_customers(100)
+    end
+  end
+
   describe "fibonacci/1" do
     test "computes the fibonacci sequence" do
       # implement a fibonnaci number sequence generator using pattern matching
