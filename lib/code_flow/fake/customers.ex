@@ -64,6 +64,23 @@ defmodule CodeFlow.Fake.Customers do
     end
   end
 
+  @doc """
+  Create a customer from the params.
+
+  This only provides a fake interface for creating a customer. It is actually
+  sending a message to the process executing the test. The test process is
+  verifying that the expected side-effects were created. In a real system, this
+  would actually create entries in a database.
+  """
+  @spec create(params :: map) :: {:ok, Customer.t()} | {:error, String.t()}
+  def create(%{name: name} = _params) when is_binary(name) do
+    {:ok, %Customer{name: name}}
+  end
+
+  def create(_params) do
+    {:error, "Customer `name` is required"}
+  end
+
   @type event :: {atom(), any()}
 
   @doc """
