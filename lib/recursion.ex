@@ -17,6 +17,19 @@ defmodule CodeFlow.Recursion do
   def sum_purchases(_customers) do
   end
 
+  @doc """
+  Count the number of active customers. Note: Normally this would be done with a
+  query to an SQL database. This is just to practice conditionally incrementing
+  a counter and looping using recursion.
+  """
+  def count_active(_customers) do
+
+  end
+
+  @doc """
+  Create the desired number of customers. Provide the number of customers to
+  create. Something like this could be used in a testing setup.
+  """
   def create_customers(number) do
     do_create_customers(number, 0)
   end
@@ -35,23 +48,6 @@ defmodule CodeFlow.Recursion do
 
   defp do_create_customers(total, _num) do
     "Created #{total} customers!"
-  end
-
-  @doc """
-  Count the number of active customers. Note: Normally this would be done with a
-  query to an SQL database. This is just to practice conditionally incrementing
-  a counter and looping using recursion.
-  """
-  def count_active(_customers) do
-
-  end
-
-  @doc """
-  Create the desired number of customers. Provide the number of customers to
-  create. Something like this could be used in a testing setup.
-  """
-  def create_customers(_number) do
-
   end
 
   @doc """
