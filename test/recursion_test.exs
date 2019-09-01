@@ -37,9 +37,24 @@ defmodule CodeFlow.RecursionTest do
     end
   end
 
-  describe "create_customers/1" do
-    test "calls Customers.create/1 correct number of times" do
+  describe "count_active/1" do
+    test "returns correct count of active customers" do
       assert false
+    end
+  end
+
+  describe "create_customers/1" do
+    test "does not create any when given 0" do
+      assert "Created 0 customers!" == Recursion.create_customers(0)
+      refute_received {:customer_created, _new_customer}
+    end
+
+    test "calls Customers.create/1 correct number of times" do
+      assert "Created 3 customers!" == Recursion.create_customers(3)
+      assert_received {:customer_created, _new_customer}
+      assert_received {:customer_created, _new_customer}
+      assert_received {:customer_created, _new_customer}
+      refute_received {:customer_created, _new_customer}
     end
 
     test "returns text saying how many were created" do

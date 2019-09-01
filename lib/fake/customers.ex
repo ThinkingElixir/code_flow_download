@@ -74,7 +74,9 @@ defmodule CodeFlow.Fake.Customers do
   """
   @spec create(params :: map) :: {:ok, Customer.t()} | {:error, String.t()}
   def create(%{name: name} = _params) when is_binary(name) do
-    {:ok, %Customer{name: name}}
+    new_customer = %Customer{name: name}
+    send(self(), {:customer_created, new_customer})
+    {:ok, new_customer}
   end
 
   def create(_params) do
