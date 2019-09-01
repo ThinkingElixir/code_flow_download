@@ -21,7 +21,7 @@ defmodule CodeFlow.Recursion do
     do_create_customers(number, 0)
   end
 
-  defp do_create_customers(total, num) when num <= total do
+  defp do_create_customers(total, num) when num < total do
     case Customers.create(%{name: "Customer #{num}"}) do
       {:ok, _customer} ->
         :ok
