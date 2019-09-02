@@ -4,6 +4,7 @@ defmodule CodeFlow.RecursionTest do
   """
   use ExUnit.Case
   alias CodeFlow.Recursion
+  alias CodeFlow.Schemas.Customer
 
   describe "sum_numbers/1" do
     test "returns 0 for an empty list" do
@@ -38,8 +39,18 @@ defmodule CodeFlow.RecursionTest do
   end
 
   describe "count_active/1" do
+    test "returns 0 for empty list" do
+      assert 0 == Recursion.count_active([])
+    end
+
     test "returns correct count of active customers" do
-      assert false
+      customers = [
+        %Customer{name: "Cust 1", active: true},
+        %Customer{name: "Cust 2", active: true},
+        %Customer{name: "Cust 3", active: false},
+        %Customer{name: "Cust 4", active: true},
+      ]
+      assert 3 == Recursion.count_active(customers)
     end
   end
 
