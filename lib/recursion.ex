@@ -4,12 +4,21 @@ defmodule CodeFlow.Recursion do
   """
   alias CodeFlow.Fake.Customers
   alias CodeFlow.Schemas.Customer
+  alias CodeFlow.Schemas.OrderItem
 
   @doc """
   Sum a list of OrderItems to compute the order total.
   """
-  def order_total(_order_items) do
+  def order_total(order_items) do
+    do_order_total(order_items, 0)
+  end
 
+  defp do_order_total([%OrderItem{} = order_item | rest], total) do
+    do_order_total(rest, (order_item.quantity * order_item.item.price) + total)
+  end
+
+  defp do_order_total([], total) do
+    total
   end
 
   @doc """
