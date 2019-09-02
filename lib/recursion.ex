@@ -1,20 +1,14 @@
 defmodule CodeFlow.Recursion do
-  alias CodeFlow.Fake.Customers
-
   @moduledoc """
   Fix or complete the code to make the tests pass.
   """
+  alias CodeFlow.Fake.Customers
 
   @doc """
-  Sum a list of numbers using recursion.
+  Sum a list of OrderItems to compute the order total.
   """
-  def sum_numbers(_numbers) do
-  end
+  def order_total(_order_items) do
 
-  @doc """
-  Sum a list of purchases. A "purchase" entry is a map.
-  """
-  def sum_purchases(_customers) do
   end
 
   @doc """
