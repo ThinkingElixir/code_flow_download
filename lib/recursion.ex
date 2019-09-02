@@ -54,21 +54,9 @@ defmodule CodeFlow.Recursion do
   end
 
   defp do_create_customers(total, num) when num < total do
-    result =
-      case Customers.create(%{name: "Customer #{num}"}) do
-        {:ok, _customer} ->
-          :ok
-
-        {:error, _reason} ->
-          :error
-      end
-
-    # TODO: I don't know how to clean this up yet. Honestly, I wouldn't write it this way. Think.
-    if result == :ok do
-      do_create_customers(total, num + 1)
-    else
-      :error
-    end
+    # for simplicity, not handling a failed create
+    {:ok, _customer} = Customers.create(%{name: "Customer #{num}"})
+    do_create_customers(total, num + 1)
   end
 
   defp do_create_customers(total, _num) do
