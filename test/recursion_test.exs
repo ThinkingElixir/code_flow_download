@@ -5,36 +5,23 @@ defmodule CodeFlow.RecursionTest do
   use ExUnit.Case
   alias CodeFlow.Recursion
   alias CodeFlow.Schemas.Customer
+  alias CodeFlow.Schemas.OrderItem
+  alias CodeFlow.Schemas.Item
 
-  describe "sum_numbers/1" do
+  describe "order_total/1" do
     test "returns 0 for an empty list" do
-      assert 0 == Recursion.sum_numbers([])
+      assert 0 == Recursion.order_total([])
     end
 
-    test "returns the number for a single item" do
-      assert 100 == Recursion.sum_numbers([100])
-    end
-
-    test "sums all items in a list together" do
-      numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-      assert 45 == Recursion.sum_numbers(numbers)
-    end
-  end
-
-  describe "sum_purchases/1" do
-    test "returns 0 for an empty list" do
-      assert 0 == Recursion.sum_purchases([])
-    end
-
-    test "sums the purchases for all maps in a list" do
-      customers = [
-        %{name: "Customer 1", purchases: 10_000},
-        %{name: "Customer 2", purchases: 25},
-        %{name: "Customer 3", purchases: 100},
-        %{name: "Customer 4", purchases: 550},
-        %{name: "Customer 5", purchases: 250}
+    test "sums the total for all OrderItems in a list" do
+      order_items = [
+        %OrderItem{quantity: 2, item: %Item{name: "Item 1", price: 5.00}},
+        %OrderItem{quantity: 1, item: %Item{name: "Item 2", price: 8.75}},
+        %OrderItem{quantity: 3, item: %Item{name: "Item 3", price: 2.50}},
+        %OrderItem{quantity: 10, item: %Item{name: "Item 4", price: 11.00}},
+        %OrderItem{quantity: 0, item: %Item{name: "Item 5", price: 1.00}}
       ]
-      assert 10_925 == Recursion.sum_purchases(customers)
+      assert 136.25 == Recursion.order_total(order_items)
     end
   end
 

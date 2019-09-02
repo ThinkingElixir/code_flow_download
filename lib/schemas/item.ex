@@ -7,6 +7,7 @@ defmodule CodeFlow.Schemas.Item do
   defstruct [
     :id,
     :name,
+    {:price, 0.0},
     {:weight, 0.0},
     {:active, true}
   ]
@@ -14,6 +15,7 @@ defmodule CodeFlow.Schemas.Item do
   @type t :: %Item{
           id: nil | integer(),
           name: nil | String.t(),
+          price: float(),
           weight: float(),
           active: boolean()
         }
