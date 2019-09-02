@@ -3,6 +3,7 @@ defmodule CodeFlow.Recursion do
   Fix or complete the code to make the tests pass.
   """
   # alias CodeFlow.Fake.Customers
+  # alias CodeFlow.Schemas.OrderItem
 
   @doc """
   Sum a list of OrderItems to compute the order total.
