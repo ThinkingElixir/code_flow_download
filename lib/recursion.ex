@@ -3,6 +3,7 @@ defmodule CodeFlow.Recursion do
   Fix or complete the code to make the tests pass.
   """
   alias CodeFlow.Fake.Customers
+  alias CodeFlow.Schemas.Customer
 
   @doc """
   Sum a list of OrderItems to compute the order total.
@@ -16,8 +17,23 @@ defmodule CodeFlow.Recursion do
   query to an SQL database. This is just to practice conditionally incrementing
   a counter and looping using recursion.
   """
-  def count_active(_customers) do
+  def count_active(customers) do
+    do_count_active(customers, 0)
+  end
 
+  # Active customer, increment counter and recurse
+  defp do_count_active([%Customer{active: true} | rest], acc) do
+    do_count_active(rest, acc + 1)
+  end
+
+  # Not active, don't increment counter, continue recursing
+  defp do_count_active([_customer | rest], acc) do
+    do_count_active(rest, acc)
+  end
+
+  # Reached end of list, return total count
+  defp do_count_active([], acc) do
+    acc
   end
 
   @doc """
@@ -29,15 +45,21 @@ defmodule CodeFlow.Recursion do
   end
 
   defp do_create_customers(total, num) when num < total do
-    case Customers.create(%{name: "Customer #{num}"}) do
-      {:ok, _customer} ->
-        :ok
+    result =
+      case Customers.create(%{name: "Customer #{num}"}) do
+        {:ok, _customer} ->
+          :ok
 
-      {:error, _reason} ->
-      # TODO: Don't raise!? Keep a good API
-        raise "Failed trying to create customer!"
+        {:error, _reason} ->
+          :error
+      end
+
+    # TODO: I don't know how to clean this up yet. Honestly, I wouldn't write it this way. Think.
+    if result == :ok do
+      do_create_customers(total, num + 1)
+    else
+      :error
     end
-    do_create_customers(total, num + 1)
   end
 
   defp do_create_customers(total, _num) do
