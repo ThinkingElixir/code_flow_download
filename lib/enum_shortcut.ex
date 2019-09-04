@@ -26,4 +26,13 @@ defmodule CodeFlow.EnumShortcut do
       order_item.quantity * order_item.item.price + total
     end)
   end
+
+  @doc """
+  Count the number of active customers. Note: Normally this would be done with a
+  query to an SQL database. This is just to practice conditionally incrementing
+  a counter and looping using recursion.
+  """
+  def count_active(_customers) do
+
+  end
 end
