@@ -12,26 +12,18 @@ defmodule CodeFlow.EnumShortcut do
   def create_customers(0), do: :ok
 
   def create_customers(number) do
-    Enum.each(1..number, fn(num) ->
+    Enum.each(1..number, fn num ->
       # for simplicity, not handling a failed create
       {:ok, _customer} = Customers.create(%{name: "Customer #{num}"})
     end)
   end
 
-  # @doc """
-  # Sum a list of OrderItems to compute the order total.
-  # """
-  # def order_total(_order_items) do
-
-  # end
-
   @doc """
   Sum a list of OrderItems to compute the order total.
   """
   def order_total(order_items) do
-    Enum.reduce(order_items, 0, fn(%OrderItem{} = order_item, total) ->
-      (order_item.quantity * order_item.item.price) + total
+    Enum.reduce(order_items, 0, fn %OrderItem{} = order_item, total ->
+      order_item.quantity * order_item.item.price + total
     end)
   end
-
 end
