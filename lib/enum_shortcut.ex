@@ -3,6 +3,7 @@ defmodule CodeFlow.EnumShortcut do
   Fix or complete the code to make the tests pass.
   """
   alias CodeFlow.Fake.Customers
+  alias CodeFlow.Schemas.Customer
   alias CodeFlow.Schemas.OrderItem
 
   @doc """
@@ -32,7 +33,27 @@ defmodule CodeFlow.EnumShortcut do
   query to an SQL database. This is just to practice conditionally incrementing
   a counter and looping using recursion.
   """
-  def count_active(_customers) do
+  # def count_active(customers) do
+  #   Enum.reduce(customers, 0, fn
+  #     %Customer{active: true}, total -> total + 1
+  #     _customer, total -> total
+  #   end)
+  # end
 
+  # def count_active(customers) do
+  #   Enum.reduce(customers, 0, &do_count_active/2)
+  # end
+
+  # defp do_count_active(%Customer{active: true}, total), do: total + 1
+  # defp do_count_active(_customer, total), do: total
+
+  def count_active(customers) do
+    Enum.reduce(customers, 0, fn(customer, total) ->
+      if customer.active do
+        total + 1
+      else
+        total
+      end
+    end)
   end
 end
