@@ -4,6 +4,7 @@ defmodule CodeFlow.EnumShortcutTest do
   """
   use ExUnit.Case
   alias CodeFlow.EnumShortcut
+  alias CodeFlow.Schemas.Customer
   alias CodeFlow.Schemas.OrderItem
   alias CodeFlow.Schemas.Item
 
@@ -39,4 +40,19 @@ defmodule CodeFlow.EnumShortcutTest do
     end
   end
 
+  describe "count_active/1" do
+    test "returns 0 for empty list" do
+      assert 0 == EnumShortcut.count_active([])
+    end
+
+    test "returns correct count of active customers" do
+      customers = [
+        %Customer{name: "Cust 1", active: true},
+        %Customer{name: "Cust 2", active: true},
+        %Customer{name: "Cust 3", active: false},
+        %Customer{name: "Cust 4", active: true},
+      ]
+      assert 3 == EnumShortcut.count_active(customers)
+    end
+  end
 end
