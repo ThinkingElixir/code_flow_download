@@ -13,7 +13,7 @@ defmodule CodeFlow.Schemas.User do
           age: nil | integer(),
           hair: nil | String.t(),
           points: integer(),
-          admin: boolean,
+          admin: boolean(),
           active: boolean()
         }
 end
