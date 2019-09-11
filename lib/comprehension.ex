@@ -22,4 +22,5 @@ defmodule CodeFlow.Comprehension do
       acc ->
         acc + user.points
     end
+  end
 end
