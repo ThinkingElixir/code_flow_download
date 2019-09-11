@@ -4,9 +4,24 @@ defmodule CodeFlow.ComprehensionTest do
   """
   use ExUnit.Case
   alias CodeFlow.Comprehension
-  alias CodeFlow.Schemas.Customer
-  alias CodeFlow.Schemas.OrderItem
-  alias CodeFlow.Schemas.Item
+  alias CodeFlow.Schemas.User
+
+  describe "award_unfair_points/2" do
+    test "returns correctly filtered list of users with incremented points" do
+      users = [
+        %User{id: 1, name: "Bruce Milford", points: 10, active: true},
+        %User{id: 2, name: "Lucy Bradshaw", points: 300, active: true},
+        %User{id: 3, name: "Howard Herman", points: 60, active: true},
+        %User{id: 4, name: "Lou Gruceman", points: 250, active: false},
+        %User{id: 5, name: "Sherry Gruceman", points: 75, active: true},
+        %User{id: 6, name: "Larry Brown", points: 0, active: false}
+      ]
+      results = Comprehension.award_unfair_points(users, 100)
+      assert length(results) == 3
+      # assert 3 expected users returned with desired incremented point values
+      assert [%{id: 1, points: 110}, %{id: 2, points: 400}, %{id: 5, points: 175}] = results
+    end
+  end
 
   describe "build_chessboard/0" do
     test "returns expected list with maps" do
@@ -50,51 +65,25 @@ defmodule CodeFlow.ComprehensionTest do
     end
   end
 
-  # describe "create_customers/1" do
-  #   test "does not create any when given 0" do
-  #     assert :ok == Comprehension.create_customers(0)
-  #     refute_received {:customer_created, _new_customer}
-  #   end
+  describe "team_points/1" do
+    test "returns 0 for an empty list" do
+      assert 0 == Comprehension.team_points([])
+    end
 
-  #   test "calls Customers.create/1 correct number of times" do
-  #     assert :ok == Comprehension.create_customers(3)
-  #     assert_received {:customer_created, _new_customer}
-  #     assert_received {:customer_created, _new_customer}
-  #     assert_received {:customer_created, _new_customer}
-  #     refute_received {:customer_created, _new_customer}
-  #   end
-  # end
+    test "returns 0 when no active users" do
+      assert 0 == Comprehension.team_points([%User{id: 4, name: "Lou Gruceman", points: 250, active: false}])
+    end
 
-  # describe "order_total/1" do
-  #   test "returns 0 for an empty list" do
-  #     assert 0 == Comprehension.order_total([])
-  #   end
-
-  #   test "sums the total for all OrderItems in a list" do
-  #     order_items = [
-  #       %OrderItem{quantity: 2, item: %Item{name: "Item 1", price: 5.00}},
-  #       %OrderItem{quantity: 1, item: %Item{name: "Item 2", price: 8.75}},
-  #       %OrderItem{quantity: 3, item: %Item{name: "Item 3", price: 2.50}},
-  #       %OrderItem{quantity: 10, item: %Item{name: "Item 4", price: 11.00}},
-  #       %OrderItem{quantity: 0, item: %Item{name: "Item 5", price: 1.00}}
-  #     ]
-  #     assert 136.25 == Comprehension.order_total(order_items)
-  #   end
-  # end
-
-  # describe "count_active/1" do
-  #   test "returns 0 for empty list" do
-  #     assert 0 == Comprehension.count_active([])
-  #   end
-
-  #   test "returns correct count of active customers" do
-  #     customers = [
-  #       %Customer{name: "Cust 1", active: true},
-  #       %Customer{name: "Cust 2", active: true},
-  #       %Customer{name: "Cust 3", active: false},
-  #       %Customer{name: "Cust 4", active: true},
-  #     ]
-  #     assert 3 == Comprehension.count_active(customers)
-  #   end
-  # end
+    test "totals points of active users" do
+      users = [
+        %User{id: 1, name: "Bruce Milford", points: 10, active: true},
+        %User{id: 2, name: "Lucy Bradshaw", points: 300, active: true},
+        %User{id: 3, name: "Howard Herman", points: 60, active: true},
+        %User{id: 4, name: "Lou Gruceman", points: 250, active: false},
+        %User{id: 5, name: "Sherry Gruceman", points: 75, active: true},
+        %User{id: 6, name: "Larry Brown", points: 0, active: false}
+      ]
+      assert 445 == Comprehension.team_points(users)
+    end
+  end
 end
