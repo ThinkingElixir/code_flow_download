@@ -3,6 +3,7 @@ defmodule CodeFlow.Errors do
   Fix or complete the code to make the tests pass.
   """
   # alias CodeFlow.Fake.Orders
+  # alias CodeFlow.Fake.Users
   # alias CodeFlow.Schemas.Order
 
   def find_user(_id) do
