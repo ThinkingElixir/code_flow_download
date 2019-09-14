@@ -5,18 +5,36 @@ defmodule CodeFlow.ErrorsTest do
   use ExUnit.Case
   alias CodeFlow.Errors
   alias CodeFlow.Schemas.User
+  alias CodeFlow.Schemas.Order
 
-  describe "find_user/1" do
-    test "returns the user as an :ok tuple when found" do
-      {:ok, %User{} = user} = Errors.find_user(1)
+  describe "find_user!/1" do
+    test "returns the user directly when found" do
+      %User{} = user = Errors.find_user!(1)
       assert user.id == 1
     end
 
-    test "returns an :error tuple when not found with expected message" do
-      {:error, reason} = Errors.find_user(99)
-      assert reason == "User not found"
+    test "raises an exception when not found" do
+      assert_raise RuntimeError, "User not found", fn ->
+        Errors.find_user!(99)
+      end
 
-      {:error, reason} = Errors.find_user(-1)
+      assert_raise RuntimeError, "Database connection failure!", fn ->
+        Errors.find_user!(-1)
+      end
+    end
+  end
+
+  describe "find_order/1" do
+    test "returns the order as an :ok tuple when found" do
+      {:ok, %Order{} = order} = Errors.find_order(30)
+      assert order.id == 30
+    end
+
+    test "returns an :error tuple when not found with expected message" do
+      {:error, reason} = Errors.find_order(99)
+      assert reason == "Order not found"
+
+      {:error, reason} = Errors.find_order(-1)
       assert reason == "Database connection failure!"
     end
   end
