@@ -70,6 +70,10 @@ defmodule CodeFlow.Fake.Users do
   exercises.
   """
   @spec find(id :: integer()) :: {:ok, User.t()} | {:error, String.t()}
+  def find(id) when is_integer(id) and id < 0 do
+    {:error, "Database connection failure!"}
+  end
+
   def find(id) when is_integer(id) do
     case Map.get(@user_db, id) do
       nil -> {:error, "User not found"}
