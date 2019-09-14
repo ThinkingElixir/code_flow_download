@@ -27,7 +27,8 @@ defmodule CodeFlow.Fake.Orders do
   an inactive item. Returns an updated Order with the item added to the
   "order_items" list.
   """
-  @spec add_item(Order.t(), Item.t(), quantity :: integer()) :: {:ok, Order.t()} | {:error, String.t()}
+  @spec add_item(Order.t(), Item.t(), quantity :: integer()) ::
+          {:ok, Order.t()} | {:error, String.t()}
   def add_item(%Order{} = order, %Item{active: true} = item, quantity) do
     new_order_item = %OrderItem{item: item, quantity: quantity}
     updated_order = %Order{order | order_items: [new_order_item | order.order_items]}
@@ -36,5 +37,22 @@ defmodule CodeFlow.Fake.Orders do
 
   def add_item(%Order{} = _order, %Item{active: false} = _item, _quantity) do
     {:error, "Cannot order an inactive item"}
+  end
+
+  @doc """
+  Find and return an order by the ID. If not found, raises an exception.
+  """
+  def find!(id) do
+    customer = %Customer{id: 1, name: "Fake Customer"}
+
+    database = %{
+      30 => %Order{id: 30, customer: customer},
+      31 => %Order{id: 31, customer: customer}
+    }
+
+    case Map.get(database, id) do
+      nil -> raise("Order not found")
+      %Order{} = order -> order
+    end
   end
 end
