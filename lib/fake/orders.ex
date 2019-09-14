@@ -42,6 +42,10 @@ defmodule CodeFlow.Fake.Orders do
   @doc """
   Find and return an order by the ID. If not found, raises an exception.
   """
+  def find!(id) when is_integer(id) and id < 0 do
+    raise "Database connection failure!"
+  end
+
   def find!(id) do
     customer = %Customer{id: 1, name: "Fake Customer"}
 
