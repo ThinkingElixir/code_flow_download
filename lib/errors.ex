@@ -6,7 +6,7 @@ defmodule CodeFlow.Errors do
   alias CodeFlow.Fake.Users
   # alias CodeFlow.Schemas.Order
 
-  def find_user(id) do
+  def find_user!(id) do
     case Users.find(id) do
       {:ok, user} ->
         user
@@ -16,7 +16,7 @@ defmodule CodeFlow.Errors do
     end
   end
 
-  def find_order!(id) do
+  def find_order(id) do
     {:ok, Orders.find!(id)}
   rescue
     e in RuntimeError ->
