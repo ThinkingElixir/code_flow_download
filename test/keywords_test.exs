@@ -35,9 +35,6 @@ defmodule CodeFlow.KeywordsTest do
 
       item = %Item{price: 10.0, quantity: 3}
       assert "3.33" == Keywords.unit_price(item, mode: :money)
-
-      item = %Item{price: 10.0, quantity: 3}
-      assert "3.33" == Keywords.unit_price(item, mode: :money)
     end
   end
 end
