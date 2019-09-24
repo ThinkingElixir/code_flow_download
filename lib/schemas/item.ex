@@ -9,6 +9,7 @@ defmodule CodeFlow.Schemas.Item do
     :name,
     {:price, 0.0},
     {:weight, 0.0},
+    {:quantity, 1},
     {:active, true}
   ]
 
@@ -16,6 +17,7 @@ defmodule CodeFlow.Schemas.Item do
           id: nil | integer(),
           name: nil | String.t(),
           price: float(),
+          quantity: integer(),
           weight: float(),
           active: boolean()
         }
