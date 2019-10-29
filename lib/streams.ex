@@ -57,6 +57,11 @@ defmodule CodeFlow.Streams do
     |> Enum.take(5)
   end
 
+# CodeFlow.Streams.steps_in_enum2([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+# CodeFlow.Streams.steps_in_stream2([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+# TODO: create a graphic that explains/shows the Enum process and one for the Stream process
+# The Stream doesn't execute a single call until something requests a value. Enum functions will do that.
+
 
   @doc """
   Create the desired number of customers. Provide the number of customers to
