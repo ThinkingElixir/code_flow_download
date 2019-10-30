@@ -14,7 +14,7 @@ defmodule CodeFlow.Streams do
     |> IO.inspect(label: "+ 3")
     |> Enum.map(&to_string(&1))
     |> IO.inspect(label: "to_string")
-    |> Enum.map(&(&1 <> " bottles of..."))
+    |> Enum.map(&(&1 <> ".00"))
   end
 
   def steps_in_enum2(data) do
@@ -26,7 +26,7 @@ defmodule CodeFlow.Streams do
     |> IO.inspect(label: "+ 3")
     |> Enum.map(&IO.inspect(to_string(&1), label: "Step 3"))
     |> IO.inspect(label: "to_string")
-    |> Enum.map(&IO.inspect(&1 <> " bottles of...", label: "Step 4"))
+    |> Enum.map(&IO.inspect("$#{&1}.00", label: "Step 4"))
     |> Enum.take(5)
   end
 
@@ -39,7 +39,7 @@ defmodule CodeFlow.Streams do
     |> IO.inspect(label: "+ 3")
     |> Stream.map(&to_string(&1))
     |> IO.inspect(label: "to_string")
-    |> Stream.map(&(&1 <> " bottles of..."))
+    |> Stream.map(&"$#{&1}.00")
     |> IO.inspect(label: "final")
     |> Enum.to_list()
   end
@@ -53,7 +53,7 @@ defmodule CodeFlow.Streams do
     |> IO.inspect(label: "+ 3")
     |> Stream.map(&IO.inspect(to_string(&1), label: "Step 3"))
     |> IO.inspect(label: "to_string")
-    |> Stream.map(&IO.inspect(&1 <> " bottles of...", label: "Step 4"))
+    |> Stream.map(&IO.inspect("$#{&1}.00", label: "Step 4"))
     |> Enum.take(5)
   end
 
