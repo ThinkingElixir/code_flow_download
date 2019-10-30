@@ -86,3 +86,16 @@ defmodule CodeFlow.Streams do
 end
 
 CodeFlow.Streams.steps_in_enum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+
+# Code organization Notes
+#
+# -- This is really about RDMBs design
+#
+# They share 99% of information, the only difference are `is_client` and `is_supplier` fields
+# It's for an internal invoicing and office management tool
+
+# gregvaughn
+# `parties` is how old-school Data Architects referred to that sort of thing
+# a `party` represents some individual or group that can engage in some other relationship
+# I learned it from a co-worker when I was at a bank. Here's a reasonable result from googling "data architecture pattern party" http://tdan.com/a-universal-person-and-organization-data-model/5014
