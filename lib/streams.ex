@@ -30,6 +30,24 @@ defmodule CodeFlow.Streams do
     |> Enum.take(5)
   end
 
+  def steps_in_enum3(data) do
+    self() |> Process.info() |> Keyword.get(:heap_size) |> IO.inspect(label: "Process heap size BEFORE")
+    data
+    |> Enum.map(&(&1 * 2))
+    |> Enum.map(&(&1 + 3))
+    |> Enum.map(&(to_string(&1)))
+    |> Enum.map(&("$#{&1}.00"))
+    |> Enum.take(5)
+    self() |> Process.info() |> Keyword.get(:heap_size) |> IO.inspect(label: "Process heap size AFTER")
+    :ok
+  end
+
+  # NOTE: This is NOT precise. Strings are managed on a separate binary heap,
+  # garbage collection kicks in for long running processes, etc. This just helps
+  # give a snapshot idea of what's going on.
+  #
+  # CodeFlow.Streams.steps_in_enum3(1..10_000_000)
+
   def steps_in_stream(data) do
     data
     |> IO.inspect(label: "original")
@@ -57,10 +75,24 @@ defmodule CodeFlow.Streams do
     |> Enum.take(5)
   end
 
+  def steps_in_stream3(data) do
+    self() |> Process.info() |> Keyword.get(:heap_size) |> IO.inspect(label: "Process heap size BEFORE")
+    data
+    |> Stream.map(&(&1 * 2))
+    |> Stream.map(&(&1 + 3))
+    |> Stream.map(&(to_string(&1)))
+    |> Stream.map(&("$#{&1}.00"))
+    |> Enum.take(5)
+    self() |> Process.info() |> Keyword.get(:heap_size) |> IO.inspect(label: "Process heap size AFTER")
+    :ok
+  end
+
 # CodeFlow.Streams.steps_in_enum2([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 # CodeFlow.Streams.steps_in_stream2([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 # TODO: create a graphic that explains/shows the Enum process and one for the Stream process
 # The Stream doesn't execute a single call until something requests a value. Enum functions will do that.
+
+  # CodeFlow.Streams.steps_in_stream3(1..10_000_000)
 
 
   @doc """
@@ -85,7 +117,8 @@ defmodule CodeFlow.Streams do
   end
 end
 
-CodeFlow.Streams.steps_in_enum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+# CodeFlow.Streams.steps_in_enum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+CodeFlow.Streams.steps_in_stream2([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
 
 # Code organization Notes
