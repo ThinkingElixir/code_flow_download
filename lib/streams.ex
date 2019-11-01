@@ -82,7 +82,8 @@ defmodule CodeFlow.Streams do
     |> Stream.map(&(&1 + 3))
     |> Stream.map(&(to_string(&1)))
     |> Stream.map(&("$#{&1}.00"))
-    |> Enum.take(5)
+    # |> Enum.take(5)
+    |> Enum.to_list()
     self() |> Process.info() |> Keyword.get(:heap_size) |> IO.inspect(label: "Process heap size AFTER")
     :ok
   end
