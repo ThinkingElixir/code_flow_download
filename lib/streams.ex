@@ -118,8 +118,10 @@ defmodule CodeFlow.Streams do
 end
 
 # CodeFlow.Streams.steps_in_enum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-CodeFlow.Streams.steps_in_stream2([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+# CodeFlow.Streams.steps_in_stream2([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+# :erlang.garbage_collect()
 
+# Using System Monitor, able to see the `beam.smp` process, do work, grow RAM and do some level of GC. Force GC, run the stream version. Very fast, no RAM increase!
 
 # Code organization Notes
 #
