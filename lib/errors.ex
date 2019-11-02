@@ -6,11 +6,11 @@ defmodule CodeFlow.Errors do
   # alias CodeFlow.Fake.Users
   # alias CodeFlow.Schemas.Order
 
-  def find_user(_id) do
+  def find_user!(_id) do
 
   end
 
-  def find_order!(_id) do
+  def find_order(_id) do
 
   end
 end
