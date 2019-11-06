@@ -38,10 +38,20 @@ defmodule CodeFlow.Streams do
 
     data
     |> Enum.map(&(&1 * 2))
+    |> Enum.map(&(&1 + 1))
+    |> Enum.map(&(&1 + 2))
     |> Enum.map(&(&1 + 3))
+    |> Enum.map(&(&1 + 4))
+    |> Enum.map(&(&1 + 5))
+    |> Enum.map(&(&1 + 6))
+    |> Enum.map(&(&1 + 7))
+    |> Enum.map(&(&1 + 8))
+    |> Enum.map(&(&1 + 9))
+    |> Enum.map(&(&1 - 10))
     |> Enum.map(&to_string(&1))
     |> Enum.map(&"$#{&1}.00")
-    |> Enum.take(5)
+    # |> Enum.take(5)
+    |> Enum.to_list()
 
     self()
     |> Process.info()
@@ -92,7 +102,16 @@ defmodule CodeFlow.Streams do
 
     data
     |> Stream.map(&(&1 * 2))
+    |> Stream.map(&(&1 + 1))
+    |> Stream.map(&(&1 + 2))
     |> Stream.map(&(&1 + 3))
+    |> Stream.map(&(&1 + 4))
+    |> Stream.map(&(&1 + 5))
+    |> Stream.map(&(&1 + 6))
+    |> Stream.map(&(&1 + 7))
+    |> Stream.map(&(&1 + 8))
+    |> Stream.map(&(&1 + 9))
+    |> Stream.map(&(&1 - 10))
     |> Stream.map(&to_string(&1))
     |> Stream.map(&"$#{&1}.00")
     # |> Enum.take(5)
@@ -105,6 +124,8 @@ defmodule CodeFlow.Streams do
 
     :ok
   end
+
+  # CodeFlow.Streams.steps_in_stream3(1..1_000_000)
 
   @doc """
   Count the number of words in a large text file.
@@ -159,29 +180,6 @@ defmodule CodeFlow.Streams do
   # The Stream doesn't execute a single call until something requests a value. Enum functions will do that.
 
   # CodeFlow.Streams.steps_in_stream3(1..10_000_000)
-
-
-
-  @doc """
-  Create the desired number of customers. Provide the number of customers to
-  create. Something like this could be used in a testing setup.
-  """
-  def create_customers(_number) do
-  end
-
-  @doc """
-  Sum a list of OrderItems to compute the order total.
-  """
-  def order_total(_order_items) do
-  end
-
-  @doc """
-  Count the number of active customers. Note: Normally this would be done with a
-  query to an SQL database. This is just to practice conditionally incrementing
-  a counter and looping using recursion.
-  """
-  def count_active(_customers) do
-  end
 end
 
 # CodeFlow.Streams.steps_in_enum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -246,4 +244,3 @@ end
 #     Erlang version: "22"
 #
 # Note it shows OTP 21 yet the Erlang version is 22? They should be the same
-
