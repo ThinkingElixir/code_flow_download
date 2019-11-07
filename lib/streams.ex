@@ -31,10 +31,13 @@ defmodule CodeFlow.Streams do
   end
 
   def steps_in_enum3(data) do
-    self()
-    |> Process.info()
-    |> Keyword.get(:heap_size)
-    |> IO.inspect(label: "Process heap size BEFORE")
+    # self()
+    # |> Process.info()
+    # |> Keyword.get(:heap_size)
+    # |> IO.inspect(label: "Process heap size BEFORE")
+    :erlang.garbage_collect()
+    IO.puts process_memory()
+    start = Time.utc_now()
 
     data
     |> Enum.map(&(&1 * 2))
@@ -48,17 +51,26 @@ defmodule CodeFlow.Streams do
     |> Enum.map(&(&1 + 8))
     |> Enum.map(&(&1 + 9))
     |> Enum.map(&(&1 - 10))
-    |> Enum.map(&to_string(&1))
-    |> Enum.map(&"$#{&1}.00")
+    # |> Enum.map(&to_string(&1))
+    # |> Enum.map(&"$#{&1}.00")
     # |> Enum.take(5)
-    |> Enum.to_list()
+    # |> Enum.to_list()
+    |> Enum.sum()
 
-    self()
-    |> Process.info()
-    |> Keyword.get(:heap_size)
-    |> IO.inspect(label: "Process heap size AFTER")
+    stop = Time.utc_now()
+    IO.puts process_memory()
+    IO.puts "#{Time.diff(stop, start, :millisecond)} msec"
+    # self()
+    # |> Process.info()
+    # |> Keyword.take([:heap_size, :total_heap_size])
+    # |> IO.inspect(label: "Process heap size AFTER")
 
     :ok
+  end
+
+  def process_memory() do
+    {:memory, value} = :erlang.process_info(self(), :memory)
+    :erlang.float_to_binary(value / 1024 / 1024, decimals: 2) <> " MB"
   end
 
   # NOTE: This is NOT precise. Strings are managed on a separate binary heap,
@@ -95,10 +107,13 @@ defmodule CodeFlow.Streams do
   end
 
   def steps_in_stream3(data) do
-    self()
-    |> Process.info()
-    |> Keyword.get(:heap_size)
-    |> IO.inspect(label: "Process heap size BEFORE")
+    # self()
+    # |> Process.info()
+    # |> Keyword.get(:heap_size)
+    # |> IO.inspect(label: "Process heap size BEFORE")
+    :erlang.garbage_collect()
+    IO.puts process_memory()
+    start = Time.utc_now()
 
     data
     |> Stream.map(&(&1 * 2))
@@ -112,15 +127,20 @@ defmodule CodeFlow.Streams do
     |> Stream.map(&(&1 + 8))
     |> Stream.map(&(&1 + 9))
     |> Stream.map(&(&1 - 10))
-    |> Stream.map(&to_string(&1))
-    |> Stream.map(&"$#{&1}.00")
+    # |> Stream.map(&to_string(&1))
+    # |> Stream.map(&"$#{&1}.00")
     # |> Enum.take(5)
-    |> Enum.to_list()
+    # |> Enum.to_list()
+    |> Enum.sum()
 
-    self()
-    |> Process.info()
-    |> Keyword.get(:heap_size)
-    |> IO.inspect(label: "Process heap size AFTER")
+    stop = Time.utc_now()
+    IO.puts process_memory()
+    IO.puts "#{Time.diff(stop, start, :millisecond)} msec"
+
+    # self()
+    # |> Process.info()
+    # |> Keyword.take([:heap_size, :total_heap_size])
+    # |> IO.inspect(label: "Process heap size AFTER")
 
     :ok
   end
