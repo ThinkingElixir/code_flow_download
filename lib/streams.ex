@@ -1,9 +1,44 @@
 defmodule CodeFlow.Streams do
   @moduledoc """
-  Fix or complete the code to make the tests pass.
+  Code that sets up scenarios where you can play and develop a better sense for
+  how Enum and Stream compare.
   """
-  # alias CodeFlow.Fake.Customers
-  # alias CodeFlow.Schemas.OrderItem
+
+  def experiment_1_enum(data) do
+    simple_measurements(fn ->
+      data
+      |> Enum.map(&(&1 * 2))
+      |> Enum.map(&(&1 + 1))
+      |> Enum.map(&(&1 + 2))
+      |> Enum.map(&(&1 + 3))
+      |> Enum.map(&(&1 + 4))
+      |> Enum.map(&(&1 + 5))
+      |> Enum.map(&(&1 + 6))
+      |> Enum.map(&(&1 + 7))
+      |> Enum.map(&(&1 + 8))
+      |> Enum.map(&(&1 + 9))
+      |> Enum.map(&(&1 - 10))
+      |> Enum.to_list()
+    end)
+  end
+
+  def experiment_1_stream(data) do
+    simple_measurements(fn ->
+      data
+      |> Stream.map(&(&1 * 2))
+      |> Stream.map(&(&1 + 1))
+      |> Stream.map(&(&1 + 2))
+      |> Stream.map(&(&1 + 3))
+      |> Stream.map(&(&1 + 4))
+      |> Stream.map(&(&1 + 5))
+      |> Stream.map(&(&1 + 6))
+      |> Stream.map(&(&1 + 7))
+      |> Stream.map(&(&1 + 8))
+      |> Stream.map(&(&1 + 9))
+      |> Stream.map(&(&1 - 10))
+      |> Enum.to_list()
+    end)
+  end
 
   def steps_in_enum(data) do
     data
@@ -36,7 +71,7 @@ defmodule CodeFlow.Streams do
     # |> Keyword.get(:heap_size)
     # |> IO.inspect(label: "Process heap size BEFORE")
     :erlang.garbage_collect()
-    IO.puts process_memory()
+    IO.puts(process_memory())
     start = Time.utc_now()
 
     data
@@ -58,8 +93,8 @@ defmodule CodeFlow.Streams do
     |> Enum.sum()
 
     stop = Time.utc_now()
-    IO.puts process_memory()
-    IO.puts "#{Time.diff(stop, start, :millisecond)} msec"
+    IO.puts(process_memory())
+    IO.puts("#{Time.diff(stop, start, :millisecond)} msec")
     # self()
     # |> Process.info()
     # |> Keyword.take([:heap_size, :total_heap_size])
@@ -71,6 +106,36 @@ defmodule CodeFlow.Streams do
   def process_memory() do
     {:memory, value} = :erlang.process_info(self(), :memory)
     :erlang.float_to_binary(value / 1024 / 1024, decimals: 2) <> " MB"
+  end
+
+  @doc """
+  This function just helps wrap the experimental one inside some crude
+  measurement tools. These help give some feedback about how the function
+  performed.
+  """
+  def simple_measurements(fun) do
+    # Force garbage collection before running the experiment.
+    # You would never do this in a production system!
+    :erlang.garbage_collect()
+    # Print out the starting memory usage
+    IO.puts(process_memory())
+
+    # start the timer
+    start = Time.utc_now()
+
+    # execute the passed in function. Ignore the result as that isn't what we
+    # care about right now.
+    _result = fun.()
+
+    # stop the timer, output the final memory usage and time.
+    stop = Time.utc_now()
+    IO.puts(process_memory())
+    IO.puts("#{Time.diff(stop, start, :millisecond)} msec")
+
+    # We don't actually care to receive the function's result. Return an `:ok`
+    # prevents a very large returned value from being added to the IEx history
+    # which takes up more RAM and isn't part of a normal running system.
+    :ok
   end
 
   # NOTE: This is NOT precise. Strings are managed on a separate binary heap,
@@ -112,7 +177,7 @@ defmodule CodeFlow.Streams do
     # |> Keyword.get(:heap_size)
     # |> IO.inspect(label: "Process heap size BEFORE")
     :erlang.garbage_collect()
-    IO.puts process_memory()
+    IO.puts(process_memory())
     start = Time.utc_now()
 
     data
@@ -134,8 +199,8 @@ defmodule CodeFlow.Streams do
     |> Enum.sum()
 
     stop = Time.utc_now()
-    IO.puts process_memory()
-    IO.puts "#{Time.diff(stop, start, :millisecond)} msec"
+    IO.puts(process_memory())
+    IO.puts("#{Time.diff(stop, start, :millisecond)} msec")
 
     # self()
     # |> Process.info()
