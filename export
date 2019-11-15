@@ -41,6 +41,10 @@ GIT_COMMITTER_NAME="Mark Ericksen" GIT_COMMITTER_EMAIL="noreply@example.com" git
 # Extracts cleaner this way too.
 git checkout master
 cd ..
+
+echo "Pausing for disk operations to complete"
+sleep 3s
+
 zip -r code_flow.zip code_flow
 
 # Move the resulting zip file up a folder
