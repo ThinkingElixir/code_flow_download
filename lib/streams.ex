@@ -123,7 +123,7 @@ defmodule CodeFlow.Streams do
   def experiment_4_enum() do
     simple_measurements(fn ->
       contents = File.read!("./test/support/lorem.txt")
-      lines = String.split(contents, "\r\n")
+      lines = String.split(contents, "\n")
 
       lines
       |> Enum.map(fn line ->
