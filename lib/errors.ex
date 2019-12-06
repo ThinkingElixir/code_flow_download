@@ -12,7 +12,6 @@ defmodule CodeFlow.Errors do
   """
   # alias CodeFlow.Fake.Orders
   # alias CodeFlow.Fake.Users
-  # alias CodeFlow.Schemas.Order
 
   def find_user!(_id) do
 
