@@ -10,23 +10,14 @@ defmodule CodeFlow.Recursion do
   @moduledoc """
   Fix or complete the code to make the tests pass.
   """
-  alias CodeFlow.Fake.Customers
-  alias CodeFlow.Schemas.Customer
-  alias CodeFlow.Schemas.OrderItem
+  # alias CodeFlow.Fake.Customers
+  # alias CodeFlow.Schemas.OrderItem
 
   @doc """
   Sum a list of OrderItems to compute the order total.
   """
-  def order_total(order_items) do
-    do_order_total(order_items, 0)
-  end
+  def order_total(_order_items) do
 
-  defp do_order_total([%OrderItem{} = order_item | rest], total) do
-    do_order_total(rest, (order_item.quantity * order_item.item.price) + total)
-  end
-
-  defp do_order_total([], total) do
-    total
   end
 
   @doc """
@@ -34,54 +25,25 @@ defmodule CodeFlow.Recursion do
   query to an SQL database. This is just to practice conditionally incrementing
   a counter and looping using recursion.
   """
-  def count_active(customers) do
-    do_count_active(customers, 0)
-  end
+  def count_active(_customers) do
 
-  # Active customer, increment counter and recurse
-  defp do_count_active([%Customer{active: true} | rest], acc) do
-    do_count_active(rest, acc + 1)
-  end
-
-  # Not active, don't increment counter, continue recursing
-  defp do_count_active([_customer | rest], acc) do
-    do_count_active(rest, acc)
-  end
-
-  # Reached end of list, return total count
-  defp do_count_active([], acc) do
-    acc
   end
 
   @doc """
   Create the desired number of customers. Provide the number of customers to
   create. Something like this could be used in a testing setup.
   """
-  def create_customers(number) do
-    do_create_customers(number, 0)
-  end
+  def create_customers(_number) do
 
-  defp do_create_customers(total, num) when num < total do
-    # for simplicity, not handling a failed create
-    {:ok, _customer} = Customers.create(%{name: "Customer #{num}"})
-    do_create_customers(total, num + 1)
-  end
-
-  defp do_create_customers(total, _num) do
-    "Created #{total} customers!"
   end
 
   @doc """
   Compute the value in the Fibonacci sequence for the number. If the number is
   "10", then the result is 10 plus the value of the 9th index of the fibonacci
   sequence.
-
   https://en.wikipedia.org/wiki/Fibonacci_number
   """
-  def fibonacci(0), do: 0
-  def fibonacci(1), do: 1
+  def fibonacci(_num) do
 
-  def fibonacci(index) do
-    fibonacci(index - 2) + fibonacci(index - 1)
   end
 end
