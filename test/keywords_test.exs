@@ -29,6 +29,12 @@ defmodule CodeFlow.KeywordsTest do
     end
   end
 
+  describe "reafactoring rounded/2" do
+    test "overrides explicit nil value to default" do
+      assert 1.2346 == Keywords.rounded(1.2345678, decimals: nil)
+    end
+  end
+
   describe "unit_price/2" do
     test "defaults to return a float" do
       assert 5.0 == Keywords.unit_price(%Item{price: 10.0, quantity: 2})
