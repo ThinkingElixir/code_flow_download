@@ -29,7 +29,7 @@ defmodule CodeFlow.KeywordsTest do
     end
   end
 
-  describe "reafactoring rounded/2" do
+  describe "refactoring rounded/2" do
     test "overrides explicit nil value to default" do
       assert 1.2346 == Keywords.rounded(1.2345678, decimals: nil)
     end
