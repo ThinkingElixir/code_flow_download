@@ -32,15 +32,15 @@ defmodule CodeFlow.Railway do
     {:error, "Not an active User"}
   end
 
-  def validate_at_least_age({:ok, %User{age: age} = user}, cuttoff_age) when age >= cuttoff_age do
+  def validate_at_least_age({:ok, %User{age: age} = user}, cutoff_age) when age >= cutoff_age do
     {:ok, user}
   end
 
-  def validate_at_least_age({:ok, _user}, _cuttoff_age) do
-    {:error, "User age is below the cuttoff"}
+  def validate_at_least_age({:ok, _user}, _cutoff_age) do
+    {:error, "User age is below the cutoff"}
   end
 
-  def validate_at_least_age(error, _cuttoff_age), do: error
+  def validate_at_least_age(error, _cutoff_age), do: error
 
   def check_name_blacklist({:ok, %User{name: name} = _user})
       when name in ["Tom", "Tim", "Tammy"] do
