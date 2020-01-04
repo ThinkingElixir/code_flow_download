@@ -38,7 +38,7 @@ defmodule CodeFlow.RailwayTest do
 
     test "rejects under-age users" do
       {:error, reason} = Railway.award_points(%User{name: "Howard", active: true, age: 15}, 10)
-      assert reason == "User age is below the cuttoff"
+      assert reason == "User age is below the cutoff"
     end
 
     test "rejects users on the blacklist" do
@@ -80,9 +80,9 @@ defmodule CodeFlow.RailwayTest do
 
     test "returns error when does not meet age requirement" do
       user = %User{name: "Tom", active: true, age: 9}
-      assert {:error, "User age is below the cuttoff"} == Railway.validate_at_least_age({:ok, user}, 10)
-      assert {:error, "User age is below the cuttoff"} == Railway.validate_at_least_age({:ok, user}, 11)
-      assert {:error, "User age is below the cuttoff"} == Railway.validate_at_least_age({:ok, user}, 30)
+      assert {:error, "User age is below the cutoff"} == Railway.validate_at_least_age({:ok, user}, 10)
+      assert {:error, "User age is below the cutoff"} == Railway.validate_at_least_age({:ok, user}, 11)
+      assert {:error, "User age is below the cutoff"} == Railway.validate_at_least_age({:ok, user}, 30)
       # passes through whatever given from higher level
       assert {:error, "other stuff"} == Railway.validate_at_least_age({:error, "other stuff"}, 20)
       assert "not a user" == Railway.validate_at_least_age("not a user", 20)
