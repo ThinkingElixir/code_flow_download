@@ -8,7 +8,7 @@ rm code_flow.zip
 
 # create the export area with initial code
 mkdir -p ${EXPORT_DIR}
-git checkout master
+git checkout main
 cp -r config/ ${EXPORT_DIR}/config/
 cp -r lib/ ${EXPORT_DIR}/lib/
 cp -r test/ ${EXPORT_DIR}/test/
@@ -37,9 +37,9 @@ git checkout -b solutions
 git add .
 GIT_COMMITTER_NAME="Mark Ericksen" GIT_COMMITTER_EMAIL="noreply@example.com" git commit --author="Mark Ericksen <>" -m "solutions"
 
-# Checkout the master branch and zip up the directory (contains the `.` dotfiles).
+# Checkout the main branch and zip up the directory (contains the `.` dotfiles).
 # Extracts cleaner this way too.
-git checkout master
+git checkout main
 cd ..
 
 echo "Pausing for disk operations to complete..."
@@ -50,7 +50,7 @@ zip -r code_flow.zip code_flow
 # Move the resulting zip file up a folder
 mv code_flow.zip ..
 
-# restore the state. End up back on master. Remove the _export/ folder
+# restore the state. End up back on main. Remove the _export/ folder
 cd ../
-git checkout master
+git checkout main
 rm -rf _export/

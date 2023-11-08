@@ -47,7 +47,7 @@ implemented. **Don't peak!** Work out your own solutions before looking at other
 ways to solve it. You learn best by doing.
 
 In order to see the solutions, you should either commit your code on the
-`master` branch or stash your work.
+`main` branch or stash your work.
 
 ### Commiting Changes
 
