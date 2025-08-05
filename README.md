@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./code-flow-text.png" width="300" alt="Code Flow course graphic">
+</p>
+
 # CodeFlow
 
 ## Notice
